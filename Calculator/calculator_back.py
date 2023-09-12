@@ -77,6 +77,8 @@ class Calculator(QMainWindow):
 
     def method_point(self):
         text=self.ui.label.text()
+        if text == "":
+            self.ui.label.setText("0")
         self.ui.label.setText(text+".")
 
     def method_plus(self):
