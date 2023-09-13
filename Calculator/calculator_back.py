@@ -30,6 +30,10 @@ class Calculator(QMainWindow):
         self.ui.delete_2.clicked.connect(self.method_del)
 
 
+    def omit_decimal(self, value : int | float) -> int | float:
+        if int(value) == value:
+            return int(value)
+        return value
 
     def method_1(self):
         text=self.ui.label.text()
@@ -73,6 +77,8 @@ class Calculator(QMainWindow):
 
     def method_point(self):
         text=self.ui.label.text()
+        if text == "":
+            self.ui.label.setText("0")
         self.ui.label.setText(text+".")
 
     def method_plus(self):
@@ -102,7 +108,8 @@ class Calculator(QMainWindow):
         text=self.ui.label.text()
 
         try:
-            ans=eval(text)
+            ans = eval(text)
+            ans = self.omit_decimal(ans)
             self.ui.label.setText(str(ans))
         except:
             self.ui.label.setText("Wrong Input")
